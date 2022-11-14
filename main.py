@@ -29,7 +29,7 @@ def getlinkfromid(id):
   }
   response2 = requests.request("GET", url, headers=headers, params=querystring)
   jess_dict2 = json.loads(response2.text)
-  if jess_dict2['status']=="true":
+  if jess_dict2['status']=="OK":
       return jess_dict2['formats'][2]['url']
   return "false"
 
