@@ -6,14 +6,15 @@ import json
 app = FastAPI()
 
 def getlist(hliwa):
-  querystrings = {"q":hliwa}
-  headerss = {
+  url = "https://youtube-media-downloader.p.rapidapi.com/v2/search/videos"
+  querystring = {"keyword":hliwa}
+  headers = {
     "X-RapidAPI-Key": "68a49ac1a2msh3a7b4896a584357p137023jsn9db99d40833e",
-    "X-RapidAPI-Host": "youtube-search-results.p.rapidapi.com"
+    "X-RapidAPI-Host": "youtube-media-downloader.p.rapidapi.com"
   }
-  urls = "https://youtube-search-results.p.rapidapi.com/youtube-search/"
-  responses = requests.request("GET", urls, headers=headerss, params=querystrings)
-  jess_dict2 = json.loads(responses.text)
+  response = requests.request("GET", url, headers=headers, params=querystring)
+  jess_dict2 = json.loads(response.text)
+
   return jess_dict2
 
 def getlinkfromid(id):
@@ -38,20 +39,18 @@ def searsh(item_id: str, q: Union[str, None] = None):
         i=0
         finalelist=[]
         while (i<10 or i>len(mylist)):
-            if mylist[i]['type']=='video':
-                mine={"songid":mylist[i]['id'],
-                "songname":mylist[i]['title'],
-                "userid":mylist[i]['author']['channelID'],
-                "trackid":mylist[i]['id'],
-                "duration":str(mylist[i]['duration']),
-                "cover_image_url":mylist[i]['bestThumbnail']['url'],
-                "first_name":mylist[i]['author']['name'],
-                "last_name":str(mylist[i]['views'])
-                }
-                
-                finalelist.append(mine)
+            mine={
+            "songid":mylist[i]['id'],
+            "songname":mylist[i]['title'],
+            "userid":mylist[i]['channel']['id'],
+            "trackid":mylist[i]['id'],
+            "duration":str(mylist[i]['lengthText']),
+            "cover_image_url":mylist[i]['thumbnails'][0]['url'],
+            "first_name":mylist[i]['channel']['name'],
+            "last_name":str(mylist[i]['viewCountText'])
+            }
+            finalelist.append(mine)
             i=i+1
-            print(finalelist)
         return {"results":finalelist }
 
 
