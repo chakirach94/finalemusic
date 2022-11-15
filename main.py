@@ -66,7 +66,7 @@ async def gotolink(item_id: str, q: Union[str, None] = None):
     if link!="false":
         response = RedirectResponse(url=link,status_code=303)
     else:
-        response = RedirectResponse(url="https://rr1---sn-p5h-gc5y.googlevideo.com/videoplayback?expire=1668471517&ei=fYZyY_7DDpyG6dsPw-K7uA0&ip=23.88.39.196&id=o-AD8vcXH_gPOXVARf1Bb8UkKzphZ5FWjeoiOke5DlR9Xq&itag=22&source=youtube&requiressl=yes&vprv=1&svpuc=1&mime=video%2Fmp4&cnr=14&ratebypass=yes&dur=179.513&lmt=1647228121272336&fexp=24001373,24007246&c=ANDROID&txp=4532434&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Csvpuc%2Cmime%2Ccnr%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIhAL3-mAgxcBhQI1vbCXrqzfzglkAK84hhO5ui68IWJ4-GAiBKOXWW5Tyz150ttixdXpUKn-C1ALVFpZ0mFRzLmdYgnw%3D%3D&redirect_counter=1&rm=sn-4g5ekr7l&req_id=66244d2638ba3ee&cms_redirect=yes&cmsv=e&ipbypass=yes&mh=wI&mip=160.177.1.229&mm=31&mn=sn-p5h-gc5y&ms=au&mt=1668449340&mv=m&mvi=1&pl=22&lsparams=ipbypass,mh,mip,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRAIgFtr7eZkeby9-Ekr3itgncfEN2sKDJXo04d-9MNCuSe8CIGLCSd3hQZUiWV2NBuFFb6OBpw7KRNwb_ROpe5LkMU7Z",status_code=303)
+        response = RedirectResponse(url="https://www.jotform.com/answers/3831367-video-background-what-site-should-i-use-to-host-direct-mp4",status_code=303)
 
     return response
 
