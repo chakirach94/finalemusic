@@ -66,7 +66,7 @@ async def gotolink(item_id: str, q: Union[str, None] = None):
     if link!="false":
         response = RedirectResponse(url=link,status_code=303)
     else:
-        response = RedirectResponse(url="https://www.jotform.com/answers/3831367-video-background-what-site-should-i-use-to-host-direct-mp4",status_code=303)
+        response = RedirectResponse(url="https://drive.google.com/uc?id=1ixtBSHFEMH9zyDkRNLU79hYSpA5ZHAdV&export=download",status_code=303)
 
     return response
 
