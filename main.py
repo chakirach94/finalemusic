@@ -66,7 +66,7 @@ async def gotolink(item_id: str, q: Union[str, None] = None):
     if link!="false":
         response = RedirectResponse(url=link,status_code=303)
     else:
-        response = RedirectResponse(url="https://drive.google.com/uc?id=1ixtBSHFEMH9zyDkRNLU79hYSpA5ZHAdV&export=download",status_code=303)
+        response = RedirectResponse(url="https://drive.google.com/uc?id=1ixtBSHFEMH9zyDkRNLU79hYSpA5ZHAd&export=download",status_code=303)
 
     return response
 
