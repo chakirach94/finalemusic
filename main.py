@@ -8,6 +8,23 @@ from fastapi.responses import RedirectResponse, HTMLResponse
 
 app = FastAPI()
 
+def channelsearch(channel):
+  url = "https://youtube-media-downloader.p.rapidapi.com/v2/search/channels"
+
+  querystring = {"keyword":channel,"sortBy":"relevance"}
+
+  headers = {
+    "X-RapidAPI-Key": "68a49ac1a2msh3a7b4896a584357p137023jsn9db99d40833e",
+    "X-RapidAPI-Host": "youtube-media-downloader.p.rapidapi.com"
+  }
+
+  response = requests.request("GET", url, headers=headers, params=querystring)
+  jess_dict2 = json.loads(response.text)
+  if jess_dict2['status']==True:
+      return jess_dict2
+  return "false"
+
+
 def getlist(hliwa):
   url = "https://youtube-media-downloader.p.rapidapi.com/v2/search/videos"
   querystring = {"keyword":hliwa}
@@ -141,6 +158,23 @@ def artistbyid(item_id: str, q: Union[str, None] = None):
         else:
           m={"id":"UCuAXFkgsw1L7xaCfnd5JJOw","username":"Rick Astley","first_name":"Rick Astley","last_name":"3.49M subscribers","email":"true","city":"United Kingdom","avatar":"https://yt3.ggpht.com/BbWaWU-qyR5nfxxXclxsI8zepppYL5x1agIPGfRdXFm5fPEewDsRRWg4x6P6fdKNhj84GoUpUI4=s900-c-k-c0x00ffffff-no-rj"}
           return {"results":m }
+@app.get("/search/artist/{item_id}")
+def searsh(item_id: str, q: Union[str, None] = None):
+  mylist=channelsearch(item_id)
+  if mylist!="false":
+          i=0
+          finalelist=[]
+          while (i<100 and i+1<len(mylist['items'])):
+              if (mylist['items'][i]['isVerified']==True):
+                mine={
+                "avatar":mylist['items'][i]['avatar'][1]['url'],
+                "first_name":mylist['items'][i]['name'],
+                "last_name":mylist['items'][i]['subscriberCountText'],
+                "username":mylist['items'][i]['id'],
+                }
+                finalelist.append(mine)
+              i=i+1
+  return {"results":finalelist }
 
 @app.get("/gotolink/{item_id}")
 async def gotolink(item_id: str, q: Union[str, None] = None):
