@@ -65,7 +65,10 @@ def getlinkfromid(id):
   response2 = requests.request("GET", url, headers=headers, params=querystring)
   jess_dict2 = json.loads(response2.text)
   if jess_dict2['status']=="OK":
-      return jess_dict2['formats'][2]['url']
+    try :
+      jess_dict2['formats'][2]['url']
+    except:
+       jess_dict2['formats'][0]['url']
   return "false"
 
 def getvideosfromuser(id):
@@ -84,7 +87,6 @@ def getvideosfromuser(id):
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
-
 
 
 @app.get("/search/songs/{item_id}")
@@ -119,7 +121,6 @@ def searsh(item_id: str, q: Union[str, None] = None):
             finalelist.append(mine)
             i=i+1
         return {"results":finalelist }
-
 
 @app.get("/search2/songsbyuserid/{item_id}")
 def searsh2(item_id: str, q: Union[str, None] = None):
