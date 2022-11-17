@@ -86,13 +86,15 @@ def read_root():
     return {"Hello": "World"}
 
 
+
 @app.get("/search/songs/{item_id}")
 def searsh(item_id: str, q: Union[str, None] = None):
         mylist=getlist(item_id)['items']
         i=0
         finalelist=[]
         while (i<10 and i+1<len(mylist)):
-            mine={
+            try:
+              mine={
             "songid":mylist[i]['id'],
             "songname":mylist[i]['title'],
             "userid":mylist[i]['channel']['id'],
@@ -102,9 +104,22 @@ def searsh(item_id: str, q: Union[str, None] = None):
             "first_name":mylist[i]['channel']['name'],
             "last_name":str(mylist[i]['viewCountText'])
             }
+            except:
+              mine={
+            "songid":mylist[i]['id'],
+            "songname":mylist[i]['title'],
+            "userid":mylist[i]['channel']['id'],
+            "trackid":mylist[i]['id'],
+            "duration":str("2:13"),
+            "cover_image_url":mylist[i]['thumbnails'][0]['url'],
+            "first_name":mylist[i]['channel']['name'],
+            "last_name":str(mylist[i]['viewCountText'])
+            }
+            
             finalelist.append(mine)
             i=i+1
         return {"results":finalelist }
+
 
 @app.get("/search2/songsbyuserid/{item_id}")
 def searsh2(item_id: str, q: Union[str, None] = None):
