@@ -94,7 +94,7 @@ def searsh2(item_id: str, q: Union[str, None] = None):
   
         jess_dict2=getchaininformations(item_id)
         mylist=getvideosfromuser(item_id)
-        if jess_dict2!="false" and jess_dict2!="false" :
+        if jess_dict2!="false" and mylist!="false" :
           i=0
           finalelist=[]
           while (i<15 or i>len(mylist['items'])):
