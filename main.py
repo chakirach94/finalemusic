@@ -74,7 +74,7 @@ def searsh(item_id: str, q: Union[str, None] = None):
         mylist=getlist(item_id)['items']
         i=0
         finalelist=[]
-        while (i<10 or i>len(mylist)):
+        while (i<10 and i+1<len(mylist)):
             mine={
             "songid":mylist[i]['id'],
             "songname":mylist[i]['title'],
@@ -97,7 +97,7 @@ def searsh2(item_id: str, q: Union[str, None] = None):
         if jess_dict2!="false" and mylist!="false" :
           i=0
           finalelist=[]
-          while (i<15 or i>len(mylist['items'])):
+          while (i<15 and i+1<len(mylist['items'])):
               mine={
               "songid":mylist['items'][i]['id'],
               "songname":mylist['items'][i]['title'],
