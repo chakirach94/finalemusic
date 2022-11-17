@@ -130,7 +130,7 @@ def artistbyid(item_id: str, q: Union[str, None] = None):
         if jess_dict2!="false":
           mine={
               "id":str(item_id),
-              "username":jess_dict2['name'],
+              "username":str(item_id),
               "first_name":jess_dict2['name'],
               "last_name":jess_dict2['subscriberCountText'],
               "email":jess_dict2['isVerified'],
