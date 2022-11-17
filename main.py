@@ -150,7 +150,7 @@ def artistbyid(item_id: str, q: Union[str, None] = None):
               "username":str(item_id),
               "first_name":jess_dict2['name'],
               "last_name":jess_dict2['subscriberCountText'],
-              "email":jess_dict2['isVerified'],
+              "email":str(jess_dict2['isVerified']),
               "city":jess_dict2['country'],
               "avatar":jess_dict2['avatar'][3]['url'],
               }
