@@ -168,8 +168,8 @@ def searsh(item_id: str, q: Union[str, None] = None):
               if (mylist['items'][i]['isVerified']==True):
                 mine={
                 "avatar":mylist['items'][i]['avatar'][1]['url'],
-                "first_name":mylist['items'][i]['name'],
-                "last_name":mylist['items'][i]['subscriberCountText'],
+                "first_name":mylist['items'][i]['id'],
+                "last_name":mylist['items'][i]['id'],
                 "username":mylist['items'][i]['id'],
                 }
                 finalelist.append(mine)
