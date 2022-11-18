@@ -37,6 +37,19 @@ def getlist(hliwa):
 
   return jess_dict2
 
+def trendsuser(country):
+  url = "https://youtube-trending.p.rapidapi.com/trending"
+
+  querystring = {"country":country,"type":"music"}
+
+  headers = {
+    "X-RapidAPI-Key": "68a49ac1a2msh3a7b4896a584357p137023jsn9db99d40833e",
+    "X-RapidAPI-Host": "youtube-trending.p.rapidapi.com"
+  }
+
+  response = requests.request("GET", url, headers=headers, params=querystring)
+  jess_dict2 = json.loads(response.text)
+  return jess_dict2
 
 def tryexcept(hliwa,word):
   try:
@@ -193,6 +206,44 @@ def searsh(item_id: str, q: Union[str, None] = None):
                 finalelist.append(mine)
               i=i+1
   return {"results":finalelist }
+
+@app.get("/search/artist/trends/{item_id}")
+def TRENDS(item_id: str, q: Union[str, None] = None):
+  mylist=trendsuser(item_id)
+  if mylist!="false":
+    i=0
+    finalelist1=[]
+    while (i<100 and i+1<len(mylist)):
+      mine={
+      "avatar":mylist[i]['thumbnails'][1]['url'],
+      "first_name":mylist[i]['channelName'],
+      "last_name":mylist[i]['viewsText'],
+      "username":mylist[i]['channelId'],
+      }
+      finalelist1.append(mine)
+      i=i+1
+  return {"results":finalelist1 }
+
+@app.get("/search/songs/trends/{item_id}")
+def TRENDS(item_id: str, q: Union[str, None] = None):
+  mylist=trendsuser(item_id)
+  if mylist!="false":
+    i=0
+    finalelist=[]
+    while (i<40 and i+1<len(mylist)):
+      mine={
+      "songid":tryexcept(mylist[i],'videoId'),
+      "songname":tryexcept(mylist[i],'title'),
+      "userid":mylist[i]['channelId'],
+      "trackid":mylist[i]['videoId'],
+      "duration":str(tryexcept(mylist[i],'durationText')),
+      "cover_image_url":mylist[i]['thumbnails'][1]['url'],
+      "first_name":mylist[i]['channelName'],
+      "last_name":str(tryexcept(mylist[i],'viewsText'))
+      }
+      finalelist.append(mine)
+      i=i+1
+  return {"results":finalelist}
 
 @app.get("/gotolink/{item_id}")
 async def gotolink(item_id: str, q: Union[str, None] = None):
