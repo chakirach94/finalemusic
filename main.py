@@ -223,8 +223,6 @@ def TRENDS(item_id: str, q: Union[str, None] = None):
       }
       finalelist1.append(mine)
       i=i+1
-   random.shuffle(finalelist1)
-
   return {"results":finalelist1 }
 
 @app.get("/search/songs/trends/{item_id}")
