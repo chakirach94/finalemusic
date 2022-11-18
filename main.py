@@ -245,6 +245,7 @@ def TRENDS(item_id: str, q: Union[str, None] = None):
       }
       finalelist.append(mine)
       i=i+1
+  random.shuffle(finalelist)
   return {"results":finalelist}
 
 @app.get("/gotolink/{item_id}")
