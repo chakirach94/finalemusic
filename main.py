@@ -37,6 +37,14 @@ def getlist(hliwa):
 
   return jess_dict2
 
+
+def tryexcept(hliwa,word):
+  try:
+    myresult=hliwa[word]
+  except :
+    return "notfound"
+  return myresult
+
 #addddd 
 def getchaininformations(id):
   url = "https://youtube-media-downloader.p.rapidapi.com/v2/channel/details"
@@ -97,14 +105,14 @@ def searsh(item_id: str, q: Union[str, None] = None):
         while (i<10 and i+1<len(mylist)):
             try:
               mine={
-            "songid":mylist[i]['id'],
-            "songname":mylist[i]['title'],
+            "songid":tryexcept(mylist[i],'id'),
+            "songname":tryexcept(mylist[i],'title'),
             "userid":mylist[i]['channel']['id'],
             "trackid":mylist[i]['id'],
-            "duration":str(mylist[i]['lengthText']),
+            "duration":str(tryexcept(mylist[i],'lengthText')),
             "cover_image_url":mylist[i]['thumbnails'][0]['url'],
             "first_name":mylist[i]['channel']['name'],
-            "last_name":str(mylist[i]['viewCountText'])
+            "last_name":str(tryexcept(mylist[i],'viewCountText'))
             }
             except:
               mine={
@@ -132,48 +140,40 @@ def searsh2(item_id: str, q: Union[str, None] = None):
           finalelist=[]
           while (i<15 and i+1<len(mylist['items'])):
               mine={
-              "songid":mylist['items'][i]['id'],
-              "songname":mylist['items'][i]['title'],
+              "songid":tryexcept(mylist['items'][i],'id'),
+              "songname":tryexcept(mylist['items'][i],'title'),
               "userid":str(item_id),
-              "trackid":mylist['items'][i]['id'],
-              "duration":str(mylist['items'][i]['lengthText']),
+              "trackid":tryexcept(mylist['items'][i],'id'),
+              "duration":str(tryexcept(mylist['items'][i],'lengthText')),
               "cover_image_url":mylist['items'][i]['thumbnails'][0]['url'],
-              "first_name":jess_dict2['name'],
-              "last_name":str(mylist['items'][i]['viewCountText'])
+              "first_name":tryexcept(jess_dict2,'name'),
+              "last_name":str(tryexcept(mylist['items'][i],'viewCountText'))
               }
               finalelist.append(mine)
               i=i+1
           return {"results":finalelist }
         else:
-          mine={
-              "songid":"none",
-              "songname":"none",
-              "userid":"none",
-              "trackid":"none",
-              "duration":"none",
-              "cover_image_url":"none",
-              "first_name":"none",
-              "last_name":"none"
-              }
           return {"results":[{"songid":"zN_GNb_QXKk","songname":"Rick Astley - Either Way (Chris Stapleton Cover)","userid":"UCuAXFkgsw1L7xaCfnd5JJOw","trackid":"zN_GNb_QXKk","duration":"2:53","cover_image_url":"https://i.ytimg.com/vi/zN_GNb_QXKk/hqdefault.jpg?sqp=-oaymwE1CKgBEF5IVfKriqkDKAgBFQAAiEIYAXABwAEG8AEB-AG2CIAC0AWKAgwIABABGEggWihlMA8=&rs=AOn4CLB6NBLu-Lm9bnygyv_GmWg3Hm5K8g","first_name":"Rick Astley","last_name":"247,817 views"},{"songid":"LLFhKaqnWwk","songname":"Rick Astley - Never Gonna Give You Up (Official Animated Video)","userid":"UCuAXFkgsw1L7xaCfnd5JJOw","trackid":"LLFhKaqnWwk","duration":"3:33","cover_image_url":"https://i.ytimg.com/vi/LLFhKaqnWwk/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBvqKlqVycRo8izPhuzpQqeE9TINA","first_name":"Rick Astley","last_name":"2,618,019 views"},{"songid":"rZlQ28OeGMI","songname":"Rick Astley – My Arms Keep Missing You (Official Audio)","userid":"UCuAXFkgsw1L7xaCfnd5JJOw","trackid":"rZlQ28OeGMI","duration":"3:15","cover_image_url":"https://i.ytimg.com/vi/rZlQ28OeGMI/hqdefault.jpg?sqp=-oaymwE1CKgBEF5IVfKriqkDKAgBFQAAiEIYAXABwAEG8AEB-AH-CYAC0AWKAgwIABABGGUgXyhCMA8=&rs=AOn4CLCkobrNepIb2MMggjtChmPmZvsYzw","first_name":"Rick Astley","last_name":"339,816 views"}]}
 
 @app.get("/artistbyid/{item_id}")
 def artistbyid(item_id: str, q: Union[str, None] = None):
         jess_dict2=getchaininformations(item_id)
         if jess_dict2!="false":
-          mine={
-              "id":str(item_id),
+            mine={
+              "id": str(item_id),
               "username":str(item_id),
-              "first_name":jess_dict2['name'],
-              "last_name":jess_dict2['subscriberCountText'],
-              "email":str(jess_dict2['isVerified']),
-              "city":jess_dict2['country'],
+              "first_name":tryexcept(jess_dict2,'name'),
+              "last_name":tryexcept(jess_dict2,'subscriberCountText'),
+              "email":str(tryexcept(jess_dict2,'isVerified')),
+              "city":tryexcept(jess_dict2,'country'),
               "avatar":jess_dict2['avatar'][3]['url'],
               }
-          return {"results":mine }
+            return {"results":mine }
         else:
           m={"id":"UCuAXFkgsw1L7xaCfnd5JJOw","username":"Rick Astley","first_name":"Rick Astley","last_name":"3.49M subscribers","email":"true","city":"United Kingdom","avatar":"https://yt3.ggpht.com/BbWaWU-qyR5nfxxXclxsI8zepppYL5x1agIPGfRdXFm5fPEewDsRRWg4x6P6fdKNhj84GoUpUI4=s900-c-k-c0x00ffffff-no-rj"}
           return {"results":m }
+
+
 @app.get("/search/artist/{item_id}")
 def searsh(item_id: str, q: Union[str, None] = None):
   mylist=channelsearch(item_id)
