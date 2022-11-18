@@ -74,10 +74,12 @@ def getlinkfromid(id):
   jess_dict2 = json.loads(response2.text)
   if jess_dict2['status']=="OK":
     try :
-      jess_dict2['formats'][2]['url']
+      m=jess_dict2['formats'][2]['url']
     except:
-       jess_dict2['formats'][0]['url']
-  return "false"
+      m=jess_dict2['formats'][0]['url']
+    return m
+  else:
+    return "false"
 
 def getvideosfromuser(id):
   url = "https://youtube-media-downloader.p.rapidapi.com/v2/channel/videos"
