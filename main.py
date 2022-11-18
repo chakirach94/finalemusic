@@ -153,7 +153,7 @@ def searsh2(item_id: str, q: Union[str, None] = None):
         if jess_dict2!="false" and mylist!="false" :
           i=0
           finalelist=[]
-          while (i<15 and i+1<len(mylist['items'])):
+          while (i<50 and i+1<len(mylist['items'])):
               mine={
               "songid":tryexcept(mylist['items'][i],'id'),
               "songname":tryexcept(mylist['items'][i],'title'),
